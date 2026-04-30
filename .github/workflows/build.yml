@@ -21,12 +21,15 @@ jobs:
       fail-fast: false
       matrix:
         target:
-          - { arch: x86_64,  prefix: '',                    apt: '' }
-          - { arch: aarch64, prefix: aarch64-linux-gnu,     apt: 'gcc-aarch64-linux-gnu linux-libc-dev-arm64-cross libc6-dev-arm64-cross' }
-          - { arch: armv7,   prefix: arm-linux-gnueabihf,   apt: 'gcc-arm-linux-gnueabihf linux-libc-dev-armhf-cross libc6-dev-armhf-cross' }
-          - { arch: riscv64, prefix: riscv64-linux-gnu,     apt: 'gcc-riscv64-linux-gnu linux-libc-dev-riscv64-cross libc6-dev-riscv64-cross' }
-          - { arch: ppc64le, prefix: powerpc64le-linux-gnu, apt: 'gcc-powerpc64le-linux-gnu linux-libc-dev-ppc64el-cross libc6-dev-ppc64el-cross' }
-          - { arch: s390x,   prefix: s390x-linux-gnu,       apt: 'gcc-s390x-linux-gnu linux-libc-dev-s390x-cross libc6-dev-s390x-cross' }
+          - { arch: x86_64,     prefix: '',                      apt: '' }
+          - { arch: i386,       prefix: i686-linux-gnu,          apt: 'gcc-i686-linux-gnu linux-libc-dev-i386-cross libc6-dev-i386-cross' }
+          - { arch: aarch64,    prefix: aarch64-linux-gnu,       apt: 'gcc-aarch64-linux-gnu linux-libc-dev-arm64-cross libc6-dev-arm64-cross' }
+          - { arch: armv7,      prefix: arm-linux-gnueabihf,     apt: 'gcc-arm-linux-gnueabihf linux-libc-dev-armhf-cross libc6-dev-armhf-cross' }
+          - { arch: riscv64,    prefix: riscv64-linux-gnu,       apt: 'gcc-riscv64-linux-gnu linux-libc-dev-riscv64-cross libc6-dev-riscv64-cross' }
+          - { arch: ppc64le,    prefix: powerpc64le-linux-gnu,   apt: 'gcc-powerpc64le-linux-gnu linux-libc-dev-ppc64el-cross libc6-dev-ppc64el-cross' }
+          - { arch: s390x,      prefix: s390x-linux-gnu,         apt: 'gcc-s390x-linux-gnu linux-libc-dev-s390x-cross libc6-dev-s390x-cross' }
+          - { arch: mipsel,     prefix: mipsel-linux-gnu,        apt: 'gcc-mipsel-linux-gnu linux-libc-dev-mipsel-cross libc6-dev-mipsel-cross' }
+          - { arch: loongarch64, prefix: loongarch64-linux-gnu,  apt: 'gcc-loongarch64-linux-gnu linux-libc-dev-loong64-cross libc6-dev-loong64-cross' }
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
@@ -70,12 +73,15 @@ jobs:
       fail-fast: false
       matrix:
         target:
-          - { arch: x86_64,  zig_target: x86_64-linux-musl,      apt: '',                                                       ld_prefix: '',                    uapi_base: /usr/include,                          uapi_asm: /usr/include/x86_64-linux-gnu/asm }
-          - { arch: aarch64, zig_target: aarch64-linux-musl,     apt: 'binutils-aarch64-linux-gnu linux-libc-dev-arm64-cross',  ld_prefix: aarch64-linux-gnu,     uapi_base: /usr/aarch64-linux-gnu/include,        uapi_asm: /usr/aarch64-linux-gnu/include/asm }
-          - { arch: armv7,   zig_target: arm-linux-musleabihf,   apt: 'binutils-arm-linux-gnueabihf linux-libc-dev-armhf-cross', ld_prefix: arm-linux-gnueabihf,   uapi_base: /usr/arm-linux-gnueabihf/include,      uapi_asm: /usr/arm-linux-gnueabihf/include/asm }
-          - { arch: riscv64, zig_target: riscv64-linux-musl,     apt: 'binutils-riscv64-linux-gnu linux-libc-dev-riscv64-cross', ld_prefix: riscv64-linux-gnu,     uapi_base: /usr/riscv64-linux-gnu/include,        uapi_asm: /usr/riscv64-linux-gnu/include/asm }
-          - { arch: ppc64le, zig_target: powerpc64le-linux-musl, apt: 'binutils-powerpc64le-linux-gnu linux-libc-dev-ppc64el-cross', ld_prefix: powerpc64le-linux-gnu, uapi_base: /usr/powerpc64le-linux-gnu/include,    uapi_asm: /usr/powerpc64le-linux-gnu/include/asm }
-          - { arch: s390x,   zig_target: s390x-linux-musl,       apt: 'binutils-s390x-linux-gnu linux-libc-dev-s390x-cross',    ld_prefix: s390x-linux-gnu,       uapi_base: /usr/s390x-linux-gnu/include,          uapi_asm: /usr/s390x-linux-gnu/include/asm }
+          - { arch: x86_64,      zig_target: x86_64-linux-musl,       apt: '',                                                                      ld_prefix: '',                       uapi_base: /usr/include,                               uapi_asm: /usr/include/x86_64-linux-gnu/asm }
+          - { arch: i386,        zig_target: x86-linux-musl,           apt: 'binutils-i686-linux-gnu linux-libc-dev-i386-cross',                     ld_prefix: i686-linux-gnu,           uapi_base: /usr/i686-linux-gnu/include,                uapi_asm: /usr/i686-linux-gnu/include/asm }
+          - { arch: aarch64,     zig_target: aarch64-linux-musl,      apt: 'binutils-aarch64-linux-gnu linux-libc-dev-arm64-cross',                  ld_prefix: aarch64-linux-gnu,        uapi_base: /usr/aarch64-linux-gnu/include,             uapi_asm: /usr/aarch64-linux-gnu/include/asm }
+          - { arch: armv7,       zig_target: arm-linux-musleabihf,    apt: 'binutils-arm-linux-gnueabihf linux-libc-dev-armhf-cross',                ld_prefix: arm-linux-gnueabihf,      uapi_base: /usr/arm-linux-gnueabihf/include,           uapi_asm: /usr/arm-linux-gnueabihf/include/asm }
+          - { arch: riscv64,     zig_target: riscv64-linux-musl,      apt: 'binutils-riscv64-linux-gnu linux-libc-dev-riscv64-cross',                ld_prefix: riscv64-linux-gnu,        uapi_base: /usr/riscv64-linux-gnu/include,             uapi_asm: /usr/riscv64-linux-gnu/include/asm }
+          - { arch: ppc64le,     zig_target: powerpc64le-linux-musl,  apt: 'binutils-powerpc64le-linux-gnu linux-libc-dev-ppc64el-cross',            ld_prefix: powerpc64le-linux-gnu,    uapi_base: /usr/powerpc64le-linux-gnu/include,         uapi_asm: /usr/powerpc64le-linux-gnu/include/asm }
+          - { arch: s390x,       zig_target: s390x-linux-musl,        apt: 'binutils-s390x-linux-gnu linux-libc-dev-s390x-cross',                   ld_prefix: s390x-linux-gnu,          uapi_base: /usr/s390x-linux-gnu/include,               uapi_asm: /usr/s390x-linux-gnu/include/asm }
+          - { arch: mipsel,      zig_target: mipsel-linux-musl,       apt: 'binutils-mipsel-linux-gnu linux-libc-dev-mipsel-cross',                  ld_prefix: mipsel-linux-gnu,         uapi_base: /usr/mipsel-linux-gnu/include,              uapi_asm: /usr/mipsel-linux-gnu/include/asm }
+          - { arch: loongarch64, zig_target: loongarch64-linux-musl,  apt: 'binutils-loongarch64-linux-gnu linux-libc-dev-loong64-cross',            ld_prefix: loongarch64-linux-gnu,    uapi_base: /usr/loongarch64-linux-gnu/include,         uapi_asm: /usr/loongarch64-linux-gnu/include/asm }
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
@@ -189,7 +195,7 @@ jobs:
           * \`-musl\` builds: zig cc + musl-static. Smaller (~30-60 KB) and
             forward-compatible with any glibc version on the target.
 
-          Architectures: x86_64, aarch64, armv7, riscv64, ppc64le, s390x.
+          Architectures: x86_64, i386, aarch64, armv7, riscv64, ppc64le, s390x, mipsel, loongarch64.
 
           See [README](https://github.com/$REPO/blob/main/README.md)
           for the kernel-version window of applicability and a description of
